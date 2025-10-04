@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Form,FormSubmission, Notification
+from .models import Form, FormSubmission, Notification
 
 class FormSerializer(serializers.ModelSerializer):
     class Meta:
