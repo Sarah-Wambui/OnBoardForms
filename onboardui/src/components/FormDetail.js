@@ -139,11 +139,9 @@ function FormDetail() {
         }
         const payload = await res.json();
         setSubmitStatus("success");
-        alert("Submitted. server response: " + JSON.stringify(payload));
         } catch (e) {
         console.error(e);
         setSubmitStatus("failed");
-        alert("Network error submitting form");
         }
     }
 
