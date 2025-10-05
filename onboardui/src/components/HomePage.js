@@ -13,7 +13,7 @@ function HomePage() {
                       <h1>Simplify Your Onboarding Forms </h1>
                       <p>OnBoardForms helps you create, customize, and manage onboarding forms with ease.</p>
                     </div>
-                    <a  href='/forms' className='hero-btn'>Get Started</a>
+                    <a  href='/admin/dashboard' className='hero-btn'>Get Started</a>
                   </div>
                   <div className='col-6'>
                     <div className='hero-image-container'>
