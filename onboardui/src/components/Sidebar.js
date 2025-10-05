@@ -29,8 +29,8 @@ function Sidebar() {
                     </Link>
                 </li>   
                 <li class="sidebar-menu-item">
-                    <Link to="/admin/forms" className="sidebar-menu-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 512 512"><path fill="#000" fillRule="evenodd" d="M218.37 106.667L256 125.462l37.63-18.795h175.704v320H303.68L256 450.518l-47.7-23.851H42.667v-320zm-10.071 42.667H85.334V384H218.37l16.297 8.14V162.518zm218.368 0H303.68l-26.347 13.179V392.14l16.298-8.14h133.036zm-21.333 128v32H298.667v-32zm-192 0v32H106.667v-32zm192-85.334v32H298.667v-32zm-192 0v32H106.667v-32z"></path></svg>
+                    <Link to="/admin/submissions" className="sidebar-menu-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 16 16"><path fill="none" stroke="#000" strokeLinejoin="round" d="M5.005 13.5H2.5v-11h11V7m-6.89 3.986l2.511 2.511l4.52-4.52" strokeWidth={1}></path></svg>
                     Submissions
                     </Link>
                 </li>  

@@ -11,6 +11,7 @@ import ClientForms from './components/ClientForms';
 import FormDetail from './components/FormDetail';
 import AdminViewForm from './components/AdminViewForm';
 import Dashboard from './components/Dashboard';
+import Submissions from './components/Submissions';
 
 function prettyJSON(obj) {
   try {
@@ -21,10 +22,8 @@ function prettyJSON(obj) {
 }
 
 function App() {
-  const [view, setView] = useState("admin"); 
   const [forms, setForms] = useState([]);
   const [loadingForms, setLoadingForms] = useState(false);
-  const [selectedFormId, setSelectedFormId] = useState(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [configError, setConfigError] = useState(null);
@@ -52,7 +51,6 @@ function App() {
   }, []);
 
   async function fetchForms() {
-    setLoadingForms(true);
     try {
       const res = await fetch(`${API_ROOT}/forms/`);
       const data = await res.json();
@@ -60,13 +58,11 @@ function App() {
     } catch (error) {
       console.error(error);
       setForms([]);
-    } finally{
-      setLoadingForms(false);
     }
   }
 
   async function handleSelectForm(id) {
-        try {
+      try {
         const res = await fetch(`${API_ROOT}/forms/${id}/`);
         if (!res.ok) throw new Error("Failed to fetch form");
         const f = await res.json();
@@ -74,11 +70,11 @@ function App() {
         setDescription(f.description || "");
         setConfigText(prettyJSON(f.config || {}));
         setConfigError(null);
-        } catch (e) {
+      } catch (e) {
         console.error(e);
         alert("Could not load form: " + e.message);
-        }
-    }
+      }
+  }
 
     // --- Render ---
     return (
@@ -95,6 +91,7 @@ function App() {
               <Route path="forms" element={<DashboardContent forms={forms} setForms={setForms} handleSelectForm={handleSelectForm} />} />
               <Route path="forms/new" element={<CreateForm fetchForms={fetchForms} />} />
               <Route path="forms/:id" element={<AdminViewForm />} />
+              <Route path="submissions"  element={<Submissions />} />
             </Route>
           </Routes>
       </div>

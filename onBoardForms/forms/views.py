@@ -35,6 +35,10 @@ class FormByNameView(APIView):
         serializer = FormSerializer(form)
         return Response(serializer.data)
 
+class FormsCountView(APIView):
+    def get(self, request):
+        return Response({"forms_count": Form.objects.count()})
+
 class FormSubmissionView(APIView):
     def get(self, request):
         submissions = FormSubmission.objects.all()
@@ -75,7 +79,11 @@ class FormSubmissionView(APIView):
                 "created_at": notification.created_at
             }
         }, status=201)
+class SubmissionsCountView(APIView):
+    def get(self, request):
+        return Response({"submissions_count": FormSubmission.objects.count()})
 
+        
 class NotificationView(APIView):
     def get(self, request):
         submissions = Notification.objects.all()
