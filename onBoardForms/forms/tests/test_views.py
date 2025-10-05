@@ -12,10 +12,9 @@ class FormSubmissionViewTest(APITestCase):
             config={"fields": ["name"]}
         )
 
-        # Reverse with the form id
         url = reverse("form-submit", args=[form.id])
 
-        # Data must go into "data" key since your view expects request.data["data"]
+        # Data must go into "data" key since view expects request.data["data"]
         payload = {"data": '{"name": "Sarah"}'}  
 
         response = self.client.post(url, payload, format="multipart")

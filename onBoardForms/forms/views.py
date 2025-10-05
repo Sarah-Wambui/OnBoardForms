@@ -57,7 +57,7 @@ class FormSubmissionView(APIView):
         # Handle files
         for field_name, uploaded_file in request.FILES.items():
             path = default_storage.save(f"uploads/{uploaded_file.name}", uploaded_file)
-            data[field_name] = path  # store file path inside the JSON data
+            data[field_name] = path 
 
         # Save submission
         submission = FormSubmission.objects.create(form=form, data=data)
@@ -67,7 +67,7 @@ class FormSubmissionView(APIView):
             submission=submission,
             status="pending"
         )
-        # Trigger Celery task here
+        # Trigger Celery task 
         send_submission_notification.apply_async(args=[notification.id], countdown=5)
 
         return Response({
