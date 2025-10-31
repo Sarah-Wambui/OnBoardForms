@@ -1,0 +1,35 @@
+version: '3.2'
+services:
+  backend:    
+    build: ./onBoardForms
+    image: onboard_forms_backend:latest
+    container_name: onboard_forms_backend
+    ports:
+      - "8000:8000"
+    env_files:
+      - .env
+    depends_on:
+      - db
+
+  frontend:
+    build: ./onboardui
+    image: onboard_forms_frontend:latest
+    container_name: onboard_forms_frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  db:
+    image: mysql:8.0
+    container_name: onboard_forms_db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
