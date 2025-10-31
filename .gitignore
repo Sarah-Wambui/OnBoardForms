@@ -1,0 +1,9 @@
+.env
+onBoardForms/.env
+# Add this to .gitignore
+terraform/.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.zip
+*.tar.gz
