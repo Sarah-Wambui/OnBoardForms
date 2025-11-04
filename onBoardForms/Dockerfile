@@ -8,10 +8,11 @@ ENV PYTHONUNBUFFERED 1
 # Step 3:  Set the working directory in the container
 WORKDIR /app
 
-# Step 4: Install system dependencies (for Pillow, psycopg2, etc.)
+# Step 4: Install system dependencies (for Pillow, mysqlclient, etc.)
 RUN apt-get update && apt-get install -y \
     build-essential \
-    libpq-dev \
+    default-libmysqlclient-dev \
+    pkg-config \
     libjpeg-dev \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
