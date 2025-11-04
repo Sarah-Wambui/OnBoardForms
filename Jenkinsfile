@@ -32,14 +32,14 @@ pipeline{
         }
         stage('Build Backend Image'){
             steps{
-                dir('OnBoardForms/onBoardForms'){
+                dir('onBoardForms'){
                     sh "docker build -t $DOCKERHUB_USR/$BACKEND_IMAGE:latest ."
                 }
             }
         }
         stage('Build Frontend Image'){
             steps{
-                dir('OnBoardForms/onboardui'){
+                dir('onboardui'){
                     sh "docker build -t $DOCKERHUB_USR/$FRONTEND_IMAGE:latest ."
                 }
             }
