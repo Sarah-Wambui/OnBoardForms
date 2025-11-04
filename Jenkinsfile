@@ -40,21 +40,21 @@ pipeline{
         stage('Build Frontend Image'){
             steps{
                 dir('OnBoardForms/onboardui'){
-                    sh "docker build -t $$DOCKERHUB_USR/$FRONTEND_IMAGE:latest ."
+                    sh "docker build -t $DOCKERHUB_USR/$FRONTEND_IMAGE:latest ."
                 }
             }
         }
         stage('Push Images to Docker Hub'){
             steps{
-                sh "docker push $$DOCKERHUB_USR/$BACKEND_IMAGE:latest"
-                sh "docker push $$DOCKERHUB_USR/$FRONTEND_IMAGE:latest" 
+                sh "docker push $DOCKERHUB_USR/$BACKEND_IMAGE:latest"
+                sh "docker push $DOCKERHUB_USR/$FRONTEND_IMAGE:latest" 
             }
         }
         stage('Deploy Containers'){
             steps {
                 sh '''
-                docker pull $$DOCKERHUB_USR/$BACKEND_IMAGE:latest
-                docker pull $$DOCKERHUB_USR/$FRONTEND_IMAGE:latest
+                docker pull $DOCKERHUB_USR/$BACKEND_IMAGE:latest
+                docker pull $DOCKERHUB_USR/$FRONTEND_IMAGE:latest
 
                 docker stop onboard_forms_backend || true && docker rm onboard_forms_backend || true
                 docker stop onboard_forms_frontend || true && docker rm onboard_forms_frontend || true
@@ -65,10 +65,10 @@ pipeline{
                     -e DB_PASSWORD=$DB_PASSWORD \
                     -e DB_NAME=$DB_NAME \
                     -p 5000:5000 \
-                    $$DOCKERHUB_USR/$BACKEND_IMAGE:latest
+                    $DOCKERHUB_USR/$BACKEND_IMAGE:latest
 
                 docker run -d --name onboard_forms_frontend \
-                    -p 3000:3000 $$DOCKERHUB_USR/$FRONTEND_IMAGE:latest    
+                    -p 3000:3000 $DOCKERHUB_USR/$FRONTEND_IMAGE:latest    
                 '''
             }
         }
