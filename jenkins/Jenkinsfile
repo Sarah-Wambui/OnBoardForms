@@ -2,7 +2,7 @@ pipeline{
     agent any
 
     environment {
-        DOCKERHUB_USERNAME = "wambui843"
+        DOCKERHUB = credentials('dockerhub')
         BACKEND_IMAGE = "onboard_forms_backend"
         FRONTEND_IMAGE = "onboard_forms_frontend"
         DOCKER_COMPOSE_FILE = "docker-compose.yml"
@@ -12,13 +12,6 @@ pipeline{
         stage('Checkout Code'){
             steps{
                 git branch: 'main', url: 'https://github.com/Sarah-Wambui/OnBoardForms.git'
-            }
-        }
-        stage('Login to Docker Hub') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-                    sh 'echo $PASS | docker login -u $USER --password-stdin'
-                }
             }
         }
         stage('Build Backend Image'){
@@ -33,6 +26,11 @@ pipeline{
                 dir('onboardui'){
                     sh "docker build -t $DOCKERHUB_USERNAME/$FRONTEND_IMAGE:latest ."
                 }
+            }
+        }
+        stage('Login to Docker Hub') {
+            steps {
+                sh 'echo $DOCKERHUB_PSW | docker login -u $DOCKERHUB_USR --password-stdin'
             }
         }
         stage('Push Images to Docker Hub'){
