@@ -419,9 +419,9 @@
     background: linear-gradient(0deg, var(--primary-color) 0%, var(--secondary-color) 100%) !important;
     font-family: var(--font-family);
 }
-.plan-card::after {
+/* .plan-card::after {
     background-image: url("./assets/left.png");
-}
+} */
 .btn--lg {
     height: 42px;
     border-radius: 5px;
